@@ -1,12 +1,12 @@
 name: Alpine build and tests
 on:
   workflow_dispatch:
-  pull_request:
-  push:
-    branches:
-      - master
-  schedule:
-    - cron: '38 2 * * *'
+  # pull_request:
+  # push:
+  #   branches:
+  #     - master
+  # schedule:
+  #   - cron: '38 2 * * *'
 
 jobs:
   alpine-build:
