@@ -1,12 +1,12 @@
 name: macOS build and tests
 on:
   workflow_dispatch:
-  pull_request:
-  push:
-    branches:
-      - master
-  schedule:
-    - cron: '38 2 * * *'
+  # pull_request:
+  # push:
+  #   branches:
+  #     - master
+  # schedule:
+  #   - cron: '38 2 * * *'
 
 jobs:
   mac-build:
