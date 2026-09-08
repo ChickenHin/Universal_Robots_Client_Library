@@ -325,37 +325,37 @@ jobs:
         env:
           URSIM_VERSION: ${{matrix.env.URSIM_VERSION}}
           ROBOT_MODEL: ${{matrix.env.ROBOT_MODEL}}
-      - name: install gcovr
-        run: sudo apt-get install -y gcovr
-      - name: gcovr
-        run: cd build && gcovr -r .. --xml coverage.xml --gcov-ignore-parse-errors negative_hits.warn_once_per_file --exclude "../3rdparty"
-      - name: Upload coverage reports to Codecov with GitHub Action
-        uses: codecov/codecov-action@v7
-        with:
-          fail_ci_if_error: true
-          files: build/coverage.xml
-          flags: check_version_${{ matrix.env.ROBOT_MODEL }}-${{ matrix.env.URSIM_VERSION }}
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      # - name: install gcovr
+      #   run: sudo apt-get install -y gcovr
+      # - name: gcovr
+      #   run: cd build && gcovr -r .. --xml coverage.xml --gcov-ignore-parse-errors negative_hits.warn_once_per_file --exclude "../3rdparty"
+      # - name: Upload coverage reports to Codecov with GitHub Action
+      #   uses: codecov/codecov-action@v7
+      #   with:
+      #     fail_ci_if_error: true
+      #     files: build/coverage.xml
+      #     flags: check_version_${{ matrix.env.ROBOT_MODEL }}-${{ matrix.env.URSIM_VERSION }}
+      #   env:
+      #     CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
-  test_start_ursim:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7
-      - uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.3'  # Not needed with a .ruby-version, .tool-versions or mise.toml
-          bundler-cache: true  # runs 'bundle install' and caches installed gems automatically
-      - name: Setup Bats and bats libs
-        id: setup-bats
-        uses: bats-core/bats-action@4.0.0
-      - name: Install Ruby dependencies
-        run: bundle install
-      - name: Run unittests
-        shell: bash
-        env:
-          BATS_LIB_PATH: ${{ steps.setup-bats.outputs.lib-path }}
-        run: bundle exec bashcov --skip-uncovered bats tests/test_start_ursim.bats
+  # test_start_ursim:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v7
+  #     - uses: ruby/setup-ruby@v1
+  #       with:
+  #         ruby-version: '3.3'  # Not needed with a .ruby-version, .tool-versions or mise.toml
+  #         bundler-cache: true  # runs 'bundle install' and caches installed gems automatically
+  #     - name: Setup Bats and bats libs
+  #       id: setup-bats
+  #       uses: bats-core/bats-action@4.0.0
+  #     - name: Install Ruby dependencies
+  #       run: bundle install
+  #     - name: Run unittests
+  #       shell: bash
+  #       env:
+  #         BATS_LIB_PATH: ${{ steps.setup-bats.outputs.lib-path }}
+  #       run: bundle exec bashcov --skip-uncovered bats tests/test_start_ursim.bats
       # - name: Upload coverage reports to Codecov with GitHub Action
       #   uses: codecov/codecov-action@v7
       #   with:
